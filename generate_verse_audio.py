@@ -12,7 +12,7 @@ from elevenlabs.client import ElevenLabs
 # --- Configuration (replace with your credentials) ---
 # Free tier: use a default voice (e.g. 21m00Tcm4TlvDq8ikWAM). Library voices require a paid plan.
 API_KEY = "sk_ab32954b6f3f8014eb462312c605dc446488467018fa1945"  # placeholder
-VOICE_ID = "UgBBYS2sOqTuMpoF3BR0"  # placeholder voice id; free tier must use a default voice
+VOICE_ID = "yhFUAoS32gPDJFQHbH68"  # placeholder voice id; free tier must use a default voice
 MODEL_ID = "eleven_v3"
 OUTPUT_FORMAT = "mp3_44100_128"
 

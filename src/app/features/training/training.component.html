@@ -69,55 +69,112 @@
           <div class="training__input-area">
             @if (isThreeFields) {
               <div class="training__three">
-                <label class="training__field-label">Book</label>
-                <input
-                  type="text"
-                  class="training__field"
-                  [ngModel]="book()"
-                  (ngModelChange)="book.set($event)"
-                  name="book"
-                  placeholder="e.g. John"
-                />
-                <label class="training__field-label">Chapter</label>
-                <input
-                  type="text"
-                  class="training__field"
-                  [ngModel]="chapter()"
-                  (ngModelChange)="chapter.set($event)"
-                  name="chapter"
-                  placeholder="3"
-                />
-                <label class="training__field-label">Verse</label>
-                <input
-                  type="text"
-                  class="training__field"
-                  [ngModel]="verse()"
-                  (ngModelChange)="verse.set($event)"
-                  name="verse"
-                  placeholder="16"
-                />
+                <div class="training__field-group">
+                  <label class="training__field-label">
+                    <svg class="training__field-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                    Book
+                  </label>
+                  <input
+                    type="text"
+                    class="training__field"
+                    [ngModel]="book()"
+                    (ngModelChange)="book.set($event)"
+                    name="book"
+                    placeholder="e.g. John"
+                  />
+                </div>
+                <div class="training__field-group">
+                  <label class="training__field-label">
+                    <svg class="training__field-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                    </svg>
+                    Chapter
+                  </label>
+                  <input
+                    type="text"
+                    class="training__field"
+                    [ngModel]="chapter()"
+                    (ngModelChange)="chapter.set($event)"
+                    name="chapter"
+                    placeholder="3"
+                  />
+                </div>
+                <div class="training__field-group">
+                  <label class="training__field-label">
+                    <svg class="training__field-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <line x1="9" y1="15" x2="15" y2="15"/>
+                      <line x1="9" y1="18" x2="15" y2="18"/>
+                    </svg>
+                    Verse
+                  </label>
+                  <input
+                    type="text"
+                    class="training__field"
+                    [ngModel]="verse()"
+                    (ngModelChange)="verse.set($event)"
+                    name="verse"
+                    placeholder="16"
+                  />
+                </div>
               </div>
             } @else {
-              <label class="training__field-label">Reference</label>
-              <input
-                type="text"
-                class="training__field training__field--full"
-                [ngModel]="singleLine()"
-                (ngModelChange)="singleLine.set($event)"
-                name="reference"
-                placeholder="e.g. John 3:16"
-              />
+              <div class="training__field-group training__field-group--full">
+                <label class="training__field-label">
+                  <svg class="training__field-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  </svg>
+                  Reference
+                </label>
+                <input
+                  type="text"
+                  class="training__field training__field--full"
+                  [ngModel]="singleLine()"
+                  (ngModelChange)="singleLine.set($event)"
+                  name="reference"
+                  placeholder="e.g. John 3:16"
+                />
+              </div>
             }
           </div>
-          <button type="submit" class="training__project">Project</button>
+          <button type="submit" class="training__project">
+            <svg class="training__project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            Project
+          </button>
         </form>
         <p class="training__hint">(or Press Enter)</p>
         <div class="training__history">
-          <h3 class="training__history-title">This session</h3>
+          <h3 class="training__history-title">
+            <svg class="training__history-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            This session
+          </h3>
           <ul class="training__history-list">
             @for (a of state.answers; track $index) {
               <li class="training__history-item" [class.training__history-item--correct]="a.correct" [class.training__history-item--wrong]="!a.correct">
-                {{ a.yourAnswer }} — {{ a.correct ? '✓' : '✗' }} ({{ a.timeSeconds | number:'1.1-1' }}s)
+                @if (a.correct) {
+                  <svg class="training__check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                } @else {
+                  <svg class="training__check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                }
+                <span class="training__history-text">{{ a.yourAnswer }}</span>
+                <span class="training__history-time">({{ a.timeSeconds | number:'1.1-1' }}s)</span>
               </li>
             }
           </ul>

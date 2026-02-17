@@ -21,7 +21,7 @@ export class TrainingComponent implements OnInit {
   voiceId = signal('');
   difficulty = signal<Difficulty>('easy');
   count = signal(10);
-  skipOnWrong = signal(false);
+  skipOnWrong = signal(true);
 
   book = signal('');
   chapter = signal('');
@@ -69,7 +69,7 @@ export class TrainingComponent implements OnInit {
     }
     const n = Math.max(1, Math.floor(Number(this.count()) || 10));
     this.session.startSession(
-      (this.voiceId() || this.voices()[0]?.id) ?? 'josh',
+      (this.voiceId() || this.voices()[0]?.id) ?? 'sarah',
       this.difficulty(),
       n,
       this.skipOnWrong()
