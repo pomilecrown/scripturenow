@@ -1,0 +1,128 @@
+<div class="training">
+  <aside class="training__side">
+    <h2 class="training__side-title">Choose</h2>
+    <label class="training__label">Voice</label>
+    <select
+      class="training__select"
+      [ngModel]="voiceId()"
+      (ngModelChange)="voiceId.set($event)"
+      [disabled]="state.active"
+    >
+      @for (v of voices(); track v.id) {
+        <option [value]="v.id">{{ v.label }}</option>
+      }
+    </select>
+    <label class="training__label">Difficulty</label>
+    <select
+      class="training__select"
+      [ngModel]="difficulty()"
+      (ngModelChange)="difficulty.set($event)"
+      [disabled]="state.active"
+    >
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+    <p class="training__section-label">Choose Session Length</p>
+    <label class="training__label">Number of scriptures</label>
+    <input
+      type="number"
+      class="training__input"
+      min="1"
+      [ngModel]="count()"
+      (ngModelChange)="count.set($event)"
+      [disabled]="state.active"
+    />
+    <label class="training__checkbox-wrap">
+      <input
+        type="checkbox"
+        [ngModel]="skipOnWrong()"
+        (ngModelChange)="skipOnWrong.set($event)"
+        [disabled]="state.active"
+      />
+      <span>Skip to next when incorrect</span>
+    </label>
+    <div class="training__actions">
+      <button type="button" class="training__btn training__btn--teal" (click)="startSession()" [disabled]="state.active || !engine">
+        Start Session
+      </button>
+      <button type="button" class="training__btn training__btn--teal" (click)="endSession()" [disabled]="!state.active">
+        End Session
+      </button>
+      <button type="button" class="training__btn training__btn--teal" (click)="goToHistory()">Results History</button>
+    </div>
+  </aside>
+  <main class="training__main">
+    @if (!engine) {
+      <p class="training__no-engine">Select a program on the <a href="/">home page</a> first.</p>
+    } @else if (!state.active) {
+      <div class="training__idle">
+        <p>Configure options and click <strong>Start Session</strong>.</p>
+      </div>
+    } @else {
+      <div class="training__active">
+        <div class="training__timer-wrap">
+          <span class="training__timer-label">Time</span>
+          <app-timer class="training__timer" [seconds]="elapsedSeconds" />
+        </div>
+        <form class="training__form" (ngSubmit)="onSubmit($event)">
+          <div class="training__input-area">
+            @if (isThreeFields) {
+              <div class="training__three">
+                <label class="training__field-label">Book</label>
+                <input
+                  type="text"
+                  class="training__field"
+                  [ngModel]="book()"
+                  (ngModelChange)="book.set($event)"
+                  name="book"
+                  placeholder="e.g. John"
+                />
+                <label class="training__field-label">Chapter</label>
+                <input
+                  type="text"
+                  class="training__field"
+                  [ngModel]="chapter()"
+                  (ngModelChange)="chapter.set($event)"
+                  name="chapter"
+                  placeholder="3"
+                />
+                <label class="training__field-label">Verse</label>
+                <input
+                  type="text"
+                  class="training__field"
+                  [ngModel]="verse()"
+                  (ngModelChange)="verse.set($event)"
+                  name="verse"
+                  placeholder="16"
+                />
+              </div>
+            } @else {
+              <label class="training__field-label">Reference</label>
+              <input
+                type="text"
+                class="training__field training__field--full"
+                [ngModel]="singleLine()"
+                (ngModelChange)="singleLine.set($event)"
+                name="reference"
+                placeholder="e.g. John 3:16"
+              />
+            }
+          </div>
+          <button type="submit" class="training__project">Project</button>
+        </form>
+        <p class="training__hint">(or Press Enter)</p>
+        <div class="training__history">
+          <h3 class="training__history-title">This session</h3>
+          <ul class="training__history-list">
+            @for (a of state.answers; track $index) {
+              <li class="training__history-item" [class.training__history-item--correct]="a.correct" [class.training__history-item--wrong]="!a.correct">
+                {{ a.yourAnswer }} — {{ a.correct ? '✓' : '✗' }} ({{ a.timeSeconds | number:'1.1-1' }}s)
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    }
+  </main>
+</div>

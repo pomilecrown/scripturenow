@@ -1,0 +1,51 @@
+<div class="results">
+  <header class="results__header">
+    <h1 class="results__title">Results</h1>
+    @if (res) {
+      <button type="button" class="results__my-scores" (click)="myScores()">My Scores</button>
+    }
+  </header>
+  @if (res) {
+    <div class="results__divider"></div>
+    <div class="results__summary">
+      <div class="results__metric">
+        <span class="results__metric-label">Accuracy</span>
+        <span class="results__metric-value">{{ res.accuracy | number:'1.2-2' }} %</span>
+      </div>
+      <div class="results__metric">
+        <span class="results__metric-label">Average Time</span>
+        <span class="results__metric-value">{{ res.averageTimeSeconds | number:'1.2-2' }}s</span>
+      </div>
+      <div class="results__meta">
+        <span>Scriptures Attempted: {{ res.scripturesAttempted }}</span>
+        <span>Platform: {{ res.platform }}</span>
+      </div>
+    </div>
+    <div class="results__table-wrap">
+      <table class="results__table">
+        <thead>
+          <tr>
+            <th>Your Answer</th>
+            <th>Correct Answer</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (d of res.details; track $index) {
+            <tr [class.results__row--correct]="d.correct" [class.results__row--wrong]="!d.correct">
+              <td>{{ d.yourAnswer }}</td>
+              <td>{{ d.correctAnswer }}</td>
+              <td>{{ d.timeSeconds | number:'1.2-2' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="results__actions">
+      <button type="button" class="results__btn results__btn--teal" (click)="done()">Done</button>
+    </div>
+  } @else {
+    <p class="results__empty">No results to show. Complete a session from the Training page.</p>
+    <button type="button" class="results__btn" (click)="done()">Go to Training</button>
+  }
+</div>

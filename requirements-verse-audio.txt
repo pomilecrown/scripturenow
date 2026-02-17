@@ -1,0 +1,2 @@
+# For generate_verse_audio.py (ElevenLabs TTS)
+elevenlabs>=1.0.0

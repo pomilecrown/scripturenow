@@ -1,0 +1,14 @@
+<div class="home">
+  <header class="home__header">
+    <h1 class="home__title">Scripture Now</h1>
+    <p class="home__subline">KINDLY CHOOSE THE PROGRAM YOU WISH TO TRAIN FOR</p>
+  </header>
+  <div class="home__grid">
+    @for (engine of engines; track engine.id) {
+      <button type="button" class="home__card" (click)="selectAndGo(engine)">
+        <span class="home__card-short">{{ engine.shortName }}</span>
+        <span class="home__card-name">{{ engine.name }}</span>
+      </button>
+    }
+  </div>
+</div>

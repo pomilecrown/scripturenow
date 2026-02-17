@@ -1,0 +1,72 @@
+<div class="history">
+  <div class="history__strip"></div>
+  <header class="history__header">
+    <div class="history__header-left">
+      <span class="history__logo-text">Scripture Now</span>
+    </div>
+    <div class="history__toolbar">
+      <label class="history__label">Profile</label>
+      <select
+        class="history__select"
+        [value]="currentProfile"
+        (change)="setProfile(($any($event.target)).value)"
+      >
+        @for (p of profiles; track p) {
+          <option [value]="p">{{ p }}</option>
+        }
+      </select>
+    </div>
+    <div class="history__toolbar history__toolbar--right">
+      <input
+        type="text"
+        class="history__input"
+        placeholder="New profile name"
+        [value]="newProfileName()"
+        (input)="newProfileName.set(($any($event.target)).value)"
+      />
+      <button type="button" class="history__btn" (click)="addProfile()">Add profile</button>
+      <button type="button" class="history__btn history__btn--teal" (click)="export()">Export</button>
+    </div>
+  </header>
+  <p class="history__intro">Below are your previous scores</p>
+  <div class="history__table-wrap">
+    <table class="history__table">
+      <thead>
+        <tr>
+          <th>Level</th>
+          <th>Accuracy</th>
+          <th>Average Time</th>
+          <th>Scriptures Attempted</th>
+          <th>Date</th>
+          <th>Platform</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (s of sessions; track s.date + s.details?.length) {
+          <tr>
+            <td>{{ s.difficulty }}</td>
+            <td>{{ s.accuracy | number:'1.2-2' }}</td>
+            <td>{{ s.averageTimeSeconds | number:'1.2-2' }}s</td>
+            <td>{{ s.scripturesAttempted }}</td>
+            <td>{{ formatDate(s.date) }}</td>
+            <td>{{ s.platform }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  @if (sessions.length === 0) {
+    <p class="history__empty">No scores yet for this profile.</p>
+  }
+  <div class="history__actions">
+    <label class="history__file-label">
+      <span class="history__btn history__btn--secondary">Import JSON</span>
+      <input type="file" accept=".json" (change)="onImportFile($event)" class="history__file-input" />
+    </label>
+    <button type="button" class="history__btn history__btn--teal" (click)="reset()">Reset</button>
+    <button type="button" class="history__btn history__btn--teal" (click)="done()">Done</button>
+  </div>
+  @if (importError()) {
+    <p class="history__error">{{ importError() }}</p>
+  }
+</div>
